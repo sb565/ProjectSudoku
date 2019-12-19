@@ -203,4 +203,7 @@ squares = infer_grid(cropped)
 digits = get_digits(cropped, squares, 28)
 cv2.imshow("original",original)
 #digits has the shape (81,28,28) where 81 different digits are of size 28X28
+for i in range(81):
+	namei = "numbers/" + str(i) + ".png"
+	cv2.imwrite(namei,digits[i])
 show_digits(digits)
