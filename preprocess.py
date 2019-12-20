@@ -64,7 +64,7 @@ def find_corners_of_largest_polygon(img):
 	top_right, _ = max(enumerate([pt[0][0] - pt[0][1] for pt in polygon]), key=operator.itemgetter(1))
 	return [polygon[top_left][0], polygon[top_right][0], polygon[bottom_right][0], polygon[bottom_left][0]]
 
-def pre_process_image(img, skip_dilate=False):
+def pre_process_image(img, skip_dilate=True):
 	"""Blurs, applies adaptive thresholding, inverts colour and dilates the image."""
 	proc = cv2.GaussianBlur(img.copy(), (9, 9), 0)
 	proc = cv2.adaptiveThreshold(proc, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 25, 2)
@@ -195,15 +195,3 @@ def get_digits(img, squares, size):
 		digits.append(extract_digit(img, square, size))
 	return digits
 	
-original = cv2.imread("input2.jpg", cv2.IMREAD_GRAYSCALE)
-processed = pre_process_image(original)
-corners = find_corners_of_largest_polygon(processed)
-cropped = crop_and_warp(original, corners)
-squares = infer_grid(cropped)
-digits = get_digits(cropped, squares, 28)
-cv2.imshow("original",original)
-#digits has the shape (81,28,28) where 81 different digits are of size 28X28
-for i in range(81):
-	namei = "numbers/" + str(i) + ".png"
-	cv2.imwrite(namei,digits[i])
-show_digits(digits)

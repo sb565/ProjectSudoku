@@ -87,7 +87,3 @@ plt.show()
 
 model.save('cnn.h5')
 
-
-
-
-
