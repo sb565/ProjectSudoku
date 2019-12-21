@@ -23,7 +23,7 @@ def infer_grid(img):
 	for i in range(9):
 		for j in range(9):
 			p1 = (i * side, j * side)  # Top left corner of a bounding box
-			p2 = ((i + 1) * side, (j + 1) * side)  # Bottom right corner of bounding box
+			p2 = ((i + 1) * side+5, (j + 1) * side+5)  # Bottom right corner of bounding box
 			squares.append((p1, p2))
 	return squares
 

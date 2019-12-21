@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1z8jBjtNtzO2o34OkLMgHYGCnGMUZryGe
 """
 
-import keras
+import tensorflow.keras as keras
 
 import matplotlib.pyplot as plt
 from  keras.datasets import mnist
@@ -38,19 +38,19 @@ y_test = keras.utils.to_categorical(y_test, nclasses)
 x_train, x_val, y_train, y_val = train_test_split(x_train,y_train,test_size = 0.25)
 print(y_train.shape)
 
-from keras.layers import Dense, Conv2D, Dropout, MaxPooling2D, Flatten
+from keras.layers import Dense, Flatten, SeparableConv2D, BatchNormalization
 from keras.models import Sequential
 
 model = Sequential()
 
-model.add(Conv2D(32,(3,3),strides=(1,1),padding = 'same', activation = 'relu', input_shape=input_shape))
-model.add(MaxPooling2D(pool_size=(2, 2), strides=None, padding='valid'))
+model.add(SeparableConv2D(32,(3,3),strides=(1,1), activation = 'relu', input_shape=input_shape))
+model.add(BatchNormalization())
 
-model.add(Conv2D(64,(3,3),strides=(2,2),padding = 'same', activation = 'relu'))
-model.add(MaxPooling2D(pool_size=(2, 2), strides=None, padding='valid'))
+model.add(SeparableConv2D(64,(3,3),strides=(2,2), activation = 'relu'))
+model.add(BatchNormalization())
 
-model.add(Conv2D(32,(3,3),strides=(1,1),padding = 'same', activation = 'relu'))
-model.add(MaxPooling2D(pool_size=(2, 2), strides=None, padding='valid'))
+model.add(SeparableConv2D(128,(3,3),strides=(1,1), activation = 'relu'))
+model.add(BatchNormalization())
 
 model.add(Flatten())
 model.add(Dense(256, activation='relu'))

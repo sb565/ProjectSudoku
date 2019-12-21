@@ -5,7 +5,8 @@ import numpy as np
 import keras
 
 
-input_file = "Images/input3.jpeg"
+input_file = "Images/input1.jpeg"
+model_name = "cnn.h5"
 
 #using tricode
 original = cv2.imread(input_file, cv2.IMREAD_GRAYSCALE)
@@ -20,4 +21,4 @@ for i in range(81):
 	cv2.imwrite(namei,digits[i])
 preprocess.show_digits(digits)
 
-Prediction_Nummbers('cnn.h5')
+Prediction_Nummbers(model_name)
