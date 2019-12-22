@@ -1,12 +1,9 @@
 import preprocess
-from mnist_predictor import Prediction_Nummbers
+from DigitRecogniser import Digit_Detector
 import cv2
 import numpy as np
-import keras
 
-
-input_file = "Images/input1.jpeg"
-model_name = "cnn.h5"
+input_file = "Images/input3.jpeg"
 
 #using tricode
 original = cv2.imread(input_file, cv2.IMREAD_GRAYSCALE)
@@ -21,4 +18,5 @@ for i in range(81):
 	cv2.imwrite(namei,digits[i])
 preprocess.show_digits(digits)
 
-Prediction_Nummbers(model_name)
+puzzle = Digit_Detector()
+print(puzzle)
