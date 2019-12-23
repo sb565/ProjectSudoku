@@ -5,7 +5,6 @@ import cv2
 import numpy as np
 import subprocess
 
-initialise_gui()
 input_file = open_file()
 
 #using tricode

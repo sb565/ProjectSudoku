@@ -3,28 +3,49 @@ import PIL.Image, PIL.ImageTk
 import numpy as np
 from tkinter import filedialog
 
-window = Tk()
+path=''
 
 def exit_gui(screen):
 	screen.destroy()
 
 
-def open_file():
+def file_path(screen):
+	global path
 	path = filedialog.askopenfilename(title = "Select Image",filetypes = (("jpeg files","*.jpeg"),("all files","*.*")))
+	exit_gui(screen)
+
+
+def open_file():
+	initialise_gui()
+	global window
+	global path
+	
+	L1 = Label(window, text = "Sudoku Solver",justify=CENTER, font=('Times New Roman Bold',40))
+	L1.grid(column=0,row=0)
+	
+	L1 = Label(window, text = "Please select the image to be solved",justify=CENTER, font=('Times New Roman',25))
+	L1.grid(column=0,row=1)
+
+	B1 = Button(window,text='Select File',font=('Bold'),command = lambda :file_path(window))
+	B1.grid(column=0,row=3)
+
+	window.mainloop()
 	return path
 
 
-def get_values(reslist,R,window):
+def get_values(reslist,R,screen):
 	for i in range(9):
 		for j in range(9):
 			val=reslist[i][j].get()
 			if val=='':
 				val='0'
 			R[i][j]=int(val)
-	window.destroy()
-
+	exit_gui(screen)
 
 def correct_values(img, result):
+	initialise_gui()
+	global window
+
 	R=np.zeros((9,9),dtype=int)
 
 	L1 = Label(window, text = "Sudoku Solver",justify=CENTER, font=('Times New Roman Bold',40))
@@ -55,8 +76,28 @@ def correct_values(img, result):
 	B1 = Button(window,text='Solve',font=('Bold'),command = lambda :get_values(rlist,R, window))
 	B1.grid(column=0,row=11,columnspan=10)
 	window.mainloop()
-
 	return R
+
+def display(result):
+	initialise_gui()
+	result.shape = (9,9)
+	global window
+
+	L1 = Label(window, text = "Solution",justify=CENTER, font=('Times New Roman Bold',40))
+	L1.grid(column=0,row=0,columnspan=9)
+
+	rlist = []
+	for i in range(9):
+		rlist.append([])
+		for j in range(9):
+			c=j
+			r=i+1
+			tempentry = Label(window,text=result[i][j] ,font=("Calibri Bold",12),justify="center",width=4).grid(column=c,row=r)
+			rlist[i].append(tempentry)
+	B1 = Button(window,text='Exit',font=('Bold'),command = lambda :exit_gui(window))
+	B1.grid(column=0,row=10,columnspan=9)
+	window.mainloop()
+
 
 def solved():
 	filepath = 'output.txt'
@@ -71,26 +112,9 @@ def solved():
 			line = fp.readline()
 	display(np.concatenate(rows))
 
-def display(result):
-	result.shape = (9,9)
-	screen = Tk()
-	screen.title("Project Sudoku")
-	L1 = Label(screen, text = "Solution",justify=CENTER, font=('Times New Roman Bold',40))
-	L1.grid(column=0,row=0,columnspan=9)
-
-	rlist = []
-	for i in range(9):
-		rlist.append([])
-		for j in range(9):
-			c=j
-			r=i+1
-			tempentry = Label(screen,text=result[i][j] ,font=("Calibri Bold",12),justify="center",width=4).grid(column=c,row=r)
-			rlist[i].append(tempentry)
-	B1 = Button(screen,text='Exit',font=('Bold'),command = lambda :exit_gui(screen))
-	B1.grid(column=0,row=10,columnspan=9)
-	screen.mainloop()
-
 
 def initialise_gui():
+	global window
+	window = Tk()
 	window.title("Project Sudoku")
 	#window.geometry('800x600')
