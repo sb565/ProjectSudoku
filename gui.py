@@ -1,6 +1,14 @@
 from tkinter import *
 import PIL.Image, PIL.ImageTk
 import numpy as np
+from tkinter import filedialog
+
+window = Tk()
+
+
+def open_file():
+	path = filedialog.askopenfilename(title = "Select Image",filetypes = (("jpeg files","*.jpeg"),("all files","*.*")))
+	return path
 
 
 def get_values(reslist,R,window):
@@ -12,18 +20,14 @@ def get_values(reslist,R,window):
 			R[i][j]=int(val)
 	window.quit()
 
+
 def correct_values(img, result):
 	R=np.zeros((9,9))
-	window = Tk()
-	window.title("Project Sudoku")
-	#window.geometry('800x600')
-
-	height, width = img.shape
-
 
 	L1 = Label(window, text = "Sudoku Solver",justify=CENTER, font=('Times New Roman Bold',40))
 	L1.grid(column=0,row=0,columnspan=10)
 
+	height, width = img.shape
 	canvas = Canvas(window, width = width, height = height)
 	photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(img))
 	canvas.create_image(0, 0, image=photo, anchor=NW)
@@ -44,7 +48,11 @@ def correct_values(img, result):
 
 	B1 = Button(window,text='Submit',font=('Bold'),command = lambda :get_values(rlist,R, window))
 	B1.grid(column=0,row=11,columnspan=10)
-
 	window.mainloop()
 
 	return R
+
+
+def initialise_gui():
+	window.title("Project Sudoku")
+	#window.geometry('800x600')

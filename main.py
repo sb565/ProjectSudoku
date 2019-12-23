@@ -1,10 +1,13 @@
 import preprocess
 from DigitRecogniser import Digit_Detector
-from gui import correct_values
+from gui import *
 import cv2
 import numpy as np
 
-input_file = 'Images/input2.jpeg'
+
+initialise_gui()
+input_file = open_file()
+
 #using tricode
 original = cv2.imread(input_file, cv2.IMREAD_GRAYSCALE)
 processed = preprocess.pre_process_image(original)
