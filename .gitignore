@@ -1,0 +1,3 @@
+# Do not add any files from the following folders
+__pycache__/*
+numbers/*
