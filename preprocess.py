@@ -3,17 +3,18 @@ import numpy as np
 import operator
 
 def show_image(img):
-    cv2.imshow('output', img)  # Display the image
-    cv2.waitKey(0)  # Wait for any key to be pressed (with the image window active)
-    cv2.destroyAllWindows()  # Close all windows
+	cv2.imshow('output', img)  # Display the image
+	cv2.waitKey(0)  # Wait for any key to be pressed (with the image window active)
+	cv2.destroyAllWindows()  # Close all windows
 
 def show_digits(digits, colour=255):
-    rows = []
-    with_border = [cv2.copyMakeBorder(img.copy(), 1, 1, 1, 1, cv2.BORDER_CONSTANT, None, colour) for img in digits]
-    for i in range(9):
-        row = np.concatenate(with_border[i * 9:((i + 1) * 9)], axis=0)
-        rows.append(row)
-    show_image(np.concatenate(rows,axis=1))
+	rows = []
+	with_border = [cv2.copyMakeBorder(img.copy(), 1, 1, 1, 1, cv2.BORDER_CONSTANT, None, colour) for img in digits]
+	for i in range(9):
+		row = np.concatenate(with_border[i * 9:((i + 1) * 9)], axis=0)
+		rows.append(row)
+	#show_image(np.concatenate(rows,axis=1))
+	return np.concatenate(rows,axis=1)
 
 def infer_grid(img):
 	"""Infers 81 cell grid from a square image."""

@@ -1,10 +1,10 @@
 import preprocess
 from DigitRecogniser import Digit_Detector
+from gui import correct_values
 import cv2
 import numpy as np
 
-input_file = "Images/input3.jpeg"
-
+input_file = 'Images/input2.jpeg'
 #using tricode
 original = cv2.imread(input_file, cv2.IMREAD_GRAYSCALE)
 processed = preprocess.pre_process_image(original)
@@ -16,7 +16,10 @@ digits = preprocess.get_digits(cropped, squares, 28)
 for i in range(81):
 	namei = "numbers/" + str(i) + ".png"
 	cv2.imwrite(namei,digits[i])
-preprocess.show_digits(digits)
+preprocessed_image = preprocess.show_digits(digits)
 
 puzzle = Digit_Detector()
-print(puzzle)
+
+val = correct_values(preprocessed_image,puzzle)
+
+print(val)
