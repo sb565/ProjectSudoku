@@ -92,7 +92,7 @@ def display(result):
 		for j in range(9):
 			c=j
 			r=i+1
-			tempentry = Label(window,text=result[i][j] ,font=("Calibri Bold",12),justify="center",width=4).grid(column=c,row=r)
+			tempentry = Label(window,text=result[i][j] ,relief=SUNKEN,borderwidth=2,bg="cyan",font=("Calibri Bold",12),justify="center",width=4).grid(column=c,row=r)
 			rlist[i].append(tempentry)
 	B1 = Button(window,text='Exit',font=('Bold'),command = lambda :exit_gui(window))
 	B1.grid(column=0,row=10,columnspan=9)
