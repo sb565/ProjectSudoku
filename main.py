@@ -24,5 +24,6 @@ preprocessed_image = preprocess.show_digits(digits)
 puzzle = Digit_Detector()
 
 val = correct_values(preprocessed_image,puzzle)
-print(val)
+
 subprocess.run("./sudoku")
+solved()
