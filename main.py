@@ -3,7 +3,7 @@ from DigitRecogniser import Digit_Detector
 from gui import *
 import cv2
 import numpy as np
-
+import subprocess
 
 initialise_gui()
 input_file = open_file()
@@ -24,5 +24,5 @@ preprocessed_image = preprocess.show_digits(digits)
 puzzle = Digit_Detector()
 
 val = correct_values(preprocessed_image,puzzle)
-
 print(val)
+subprocess.run("./sudoku")
