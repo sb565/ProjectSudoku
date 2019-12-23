@@ -85,5 +85,5 @@ main(){
     	std::cout << std::endl;
     }    
 
-    std::cerr << "Time (in ms): " << (double)(clock() - clk) * 1000.0 / CLOCKS_PER_SEC << "\n";
+    std::cerr << "Time taken to solve (in ms): " << (double)(clock() - clk) * 1000.0 / CLOCKS_PER_SEC << "\n";
 }
