@@ -1,11 +1,11 @@
 // Template taken from https://github.com/glapul/contest_library/blob/master/template.cpp
-#include<bits/stdc++.h>	
-using namespace std;
-
+#include <vector>
+#include <iostream>
+#include <ctime>
 #define db(x) (cerr << #x << ": " << (x) << "\n")
-#define sync ios_base::sync_with_stdio(false), cin.tie(NULL)    // speedup i/o with cin/cout
+#define sync std::ios_base::sync_with_stdio(false), std::cin.tie(NULL)    // speedup i/o with cin/cout
 
-bool conflict(vector<vector<char> > &A, int r, int c, char val){
+bool conflict(std::vector<std::vector<char> > &A, int r, int c, char val){
     for(int i = 0; i < 9; i++){
         if(A[i][c] == val) return true;
         if(A[r][i] == val) return true;
@@ -25,7 +25,7 @@ bool conflict(vector<vector<char> > &A, int r, int c, char val){
     
 }
 
-void sudoku(vector<vector<char> >&A, vector<vector<char> >&B, int r, int c){
+void sudoku(std::vector<std::vector<char> >&A, std::vector<std::vector<char> >&B, int r, int c){
     if(B.size() == 0){
         int k, i = r, j = c;
         
@@ -55,8 +55,8 @@ void sudoku(vector<vector<char> >&A, vector<vector<char> >&B, int r, int c){
     }
 }
 
-void solveSudoku(vector<vector<char> > &A) {
-    vector<vector<char> >ans;
+void solveSudoku(std::vector<std::vector<char> > &A) {
+    std::vector<std::vector<char> >ans;
     sudoku(A, ans, 0, 0);
     A.clear();
     A = ans;
@@ -68,11 +68,11 @@ main(){
             freopen("./output.txt", "w", stdout);
     #endif
 	sync;
-    clock_t clk = clock();
-    vector<vector<char> > board(9, vector<char> (9));
+    std::clock_t clk = clock();
+    std::vector<std::vector<char> > board(9, std::vector<char> (9));
     for(int i = 0; i < 9; i++){
     	for(int j = 0; j < 9; j++){
-    		cin >> board[i][j];
+    		std::cin >> board[i][j];
     	}
     }
 
@@ -80,10 +80,10 @@ main(){
 	
 	for(int i = 0; i < 9; i++){
     	for(int j = 0; j < 9; j++){
-    		cout << board[i][j] << " ";
+    		std::cout << board[i][j] << " ";
     	}
-    	cout << endl;
+    	std::cout << std::endl;
     }    
 
-    cerr << "Time (in ms): " << (double)(clock() - clk) * 1000.0 / CLOCKS_PER_SEC << "\n";
+    std::cerr << "Time (in ms): " << (double)(clock() - clk) * 1000.0 / CLOCKS_PER_SEC << "\n";
 }
